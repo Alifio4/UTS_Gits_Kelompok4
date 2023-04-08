@@ -5,30 +5,57 @@
 @section('title', 'login')
 
 @section('content')
-<div class="col-md-4 mx-auto my-5">
-    <div class="card">
-        <div class="card-body">
-            <form action="{{ route("doLogin") }}" method="POST">
-                @csrf
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" aria-describedby="emailHelp">
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="{{asset('assets/auth/images/img-01.png')}}" alt="IMG">
+            </div>
+
+            <form action="{{route('doLogin')}}" method="POST">
+                <span class="login100-form-title">
+                    Login
+                </span>
+
+
+                    @csrf
+                <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                    <input class="input100 form-control @error('email') is-invalid @enderror" type="email" name="email" placeholder="Email" id="email">
                     @error('email')
                         <div id="emailHelp" class="form-text">{{ $message }}</div>
                     @enderror
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password">
+
+                <div class="wrap-input100 validate-input" data-validate = "Password is required">
+                    <input class="input100 form-control @error('password') is-invalid @enderror" type="password" name="password" id="password" placeholder="Password">
                     @error('password')
                         <div id="passwordHelp" class="form-text">{{ $message }}</div>
                     @enderror
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                    </span>
                 </div>
-                <p>
-                    Belum punya akun?
-                    <a href="{{ route('register') }}">silakan mendaftar.</a>
-                </p>
-                <button type="submit" class="btn btn-primary">Login</button>
+                
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit">
+                        Login
+                    </button>
+                </div>
+                
+
+
+                
+                <div class="text-center p-t-136">
+                    <a class="txt2" href="{{route('register')}}">
+                        Create your Account
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
             </form>
         </div>
     </div>
