@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 
 /*
@@ -41,3 +42,10 @@ Route::post('/category', [CategoryController::class, 'store'])->name('category.s
 Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
 Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
 Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+
+Route::get('/', [ProductController::class, 'index']);
+Route::get('/product/add', [ProductController::class, 'create']);
+Route::get('/product/{id}/edit', [ProductController::class, 'edit']);
+Route::get('/product/{id}/delete', [ProductController::class, 'destroy']);
+Route::post('/product', [ProductController::class, 'store']);
+Route::put('/product/{id}', [ProductController::class, 'update']);
