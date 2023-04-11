@@ -12,6 +12,7 @@ class CartController extends Controller
     public function index()
     {
         $data['carts'] = Cart::with('cart')->get();
+        
 
         return view('auth/checkout', $data);
     }
