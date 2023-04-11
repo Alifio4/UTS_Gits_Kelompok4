@@ -53,9 +53,8 @@ Route::put('/product/{id}', [ProductController::class, 'update']);
 
 Route::group(['as' => 'cart.', 'prefix' => 'cart'], function () {
     Route::get('{id}/store', [CartController::class, 'store'])->name('store');
-    Route::get('{id}/store', [CartController::class, 'store'])->name('store');
+    Route::get('{id}/add', [CartController::class, 'add'])->name('add');
+    Route::get('{id}/subtract', [CartController::class, 'subtract'])->name('subtract');
+    Route::get('{id}/destroy', [CartController::class, 'destroy'])->name('destroy');
     Route::get('checkout', [CartController::class, 'index']);
-    Route::get('????', [CartController::class, 'reduce']);
-    Route::get('????', [CartController::class, 'destroy']);
-
     });

@@ -13,19 +13,49 @@
             <div class="card-body">
                 <div class="card-title">
                     {{ $item->cart->name }} 
-                <br> {{ $item-> qty }}<br>
-                </div>
+                    
+                <br> 
                 <h6 class="card-subtitle mb-2 text-muted">{{ $item->cart->category->name }}</h6>
-                <div class="class">{{ $item->description }}</div>
-                <a href="product/{{ $item->id }}/edit">
-                    <button class="btn btn-warning mt-3" type="button">Edit</button>
-                </a>
-                <a href="product/{{ $item->id }}/delete">
-                    <button class="btn btn-danger mt-3" type="button">Hapus</button>
-                </a>
-                <a href="{{ url('cart/'.$item->id.'/store') }}">
-                    <button class="btn btn-warning mt-3" type="button">Tambahkan ke keranjang</button>
-                </a>
+                <br>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col">
+                                    <a href="{{ url('cart/'.$item->product_id.'/subtract') }}">
+                                        <button class="btn btn-warning mt-3" type="button">-</button>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <div class="card" style="width: 5rem;">
+                                        <div class="card-body">
+                                            {{ $item->qty }} 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <a href="{{ url('cart/'.$item->product_id.'/add') }}">
+                                        <button class="btn btn-warning mt-3" type="button">+</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <a href="{{ url('cart/'.$item->product_id.'/destroy') }}">
+                                <button class="btn btn-danger mt-3" type="button">Hapus</button>
+                            </a>
+                        </div>
+                    </div>
+                  </div>
+                
+                
+                <br>
+                <br>
+                
+                </div>
+                
+                
+                
           </div>
         </div>
     </div>
