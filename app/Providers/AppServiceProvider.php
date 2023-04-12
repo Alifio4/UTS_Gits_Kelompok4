@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $cart=DB::table('carts')->where('status','ditambahkan')->get()->count();
-        View::share('cart',$cart);
+        // $cart=DB::table('carts')->where('status','ditambahkan')->get()->count();
+        // View::share('cart',$cart);
     }
 }
