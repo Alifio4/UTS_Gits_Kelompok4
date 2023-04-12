@@ -6,12 +6,14 @@ use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
     public function index()
     {
-        $data['carts'] = Cart::with('cart')->get();
+        $b = Auth::user()->id;
+        $data['carts'] = Cart::with('cart')->where('user_id',$b)->get();
         
 
         return view('auth/checkout', $data);
@@ -19,11 +21,22 @@ class CartController extends Controller
     
     public function store(Request $request, $id)
     {
+        $b = Auth::id();
+        // dd($b);
+        $a = DB::table('carts')
+        ->where('user_id',$b)
+        ->where('product_id',$id)->get()->count();
 
-        $a = DB::table('carts')->where('product_id',$id)->get()->count();
+
+        // $a = DB::table('carts')->where('product_id',$id)->get()->count();
         // dd($a);
         if (empty($a)) {
             $keranjang = new Cart;
+                //tes per user
+                $b = Auth::id();
+                
+                $keranjang->user_id = $b;
+                //
                 $keranjang->product_id = $id;
                 $keranjang->save();
                 return redirect('/');

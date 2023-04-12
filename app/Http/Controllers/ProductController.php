@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -17,8 +18,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $b = Auth::id();
         $data['products'] = Product::with('category')->get();
-        $data['cart'] = Cart::where('status','ditambahkan')->get()->count();
+        $data['cart'] = Cart::where('status','ditambahkan')->where('user_id',$b)->get()->count();
 
         return view('auth/home', $data);
     }
