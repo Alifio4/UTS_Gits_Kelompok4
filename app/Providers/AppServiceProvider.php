@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use DB;
+use App\Models\Cart;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $cart=DB::table('carts')->where('status','ditambahkan')->get()->count();
+        // $cart=Cart::where('status','ditambahkan')->get()->count();
         // View::share('cart',$cart);
     }
 }

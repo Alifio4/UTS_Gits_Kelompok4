@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         $data['products'] = Product::with('category')->get();
+        $data['cart'] = Cart::where('status','ditambahkan')->get()->count();
 
         return view('auth/home', $data);
     }
