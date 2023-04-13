@@ -20,36 +20,32 @@ use App\Http\Controllers\CategoryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
 
-Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/register', [AuthController::class, 'doRegister'])->name('doRegister');
-Route::post('/login', [AuthController::class, 'doLogin'])->name('doLogin');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/register', [AuthController::class, 'register'])->name('register')->middleware('isTamu');
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('isTamu');
+Route::post('/register', [AuthController::class, 'doRegister'])->name('doRegister')->middleware('isTamu');
+Route::post('/login', [AuthController::class, 'doLogin'])->name('doLogin')->middleware('isTamu');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('isTamu');
 
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/home', function () {
-        return view('auth.home');
-    })->name('home');
-    //halaman disini
-});
+// Route::middleware(['auth'])->group(function () {
+// });
+Route::get('/product', [ProductController::class, 'index'])->name('home');
+// Route::get('/', [ProductController::class, 'index']);
+Route::get('/product/add', [ProductController::class, 'create'])->middleware('isLogin');
+Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->middleware('isLogin');
+Route::get('/product/{id}/delete', [ProductController::class, 'destroy'])->middleware('isLogin');
+Route::post('/product', [ProductController::class, 'store'])->middleware('isLogin');
+Route::put('/product/{id}', [ProductController::class, 'update'])->middleware('isLogin');
 
 Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
-Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
-Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
-Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
-Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
-Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
-
-Route::get('/', [ProductController::class, 'index']);
-Route::get('/product/add', [ProductController::class, 'create']);
-Route::get('/product/{id}/edit', [ProductController::class, 'edit']);
-Route::get('/product/{id}/delete', [ProductController::class, 'destroy']);
-Route::post('/product', [ProductController::class, 'store']);
-Route::put('/product/{id}', [ProductController::class, 'update']);
+Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create')->middleware('isLogin');
+Route::post('/category/created', [CategoryController::class, 'store'])->name('category.store')->middleware('isLogin');
+Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit')->middleware('isLogin');
+Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update')->middleware('isLogin');
+Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy')->middleware('isLogin');
 
 Route::group(['as' => 'cart.', 'prefix' => 'cart'], function () {
     Route::get('{id}/store', [CartController::class, 'store'])->name('store');
@@ -57,4 +53,6 @@ Route::group(['as' => 'cart.', 'prefix' => 'cart'], function () {
     Route::get('{id}/subtract', [CartController::class, 'subtract'])->name('subtract');
     Route::get('{id}/destroy', [CartController::class, 'destroy'])->name('destroy');
     Route::get('checkout', [CartController::class, 'index']);
-    });
+    // Route::post('pay', [CartController::class, 'pay'])->name('pay');
+    })->middleware('isLogin');
+

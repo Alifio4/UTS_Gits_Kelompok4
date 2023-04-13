@@ -21,7 +21,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('assets/auth/css/main.css')}}">
 <!--===============================================================================================-->
 </head>
-  <body>
+  <body style="background-image: url(http://127.0.0.1:8000/assets/auth/images/bg.jpg);height: 100%;background-position: center;background-repeat: no-repeat;background-size: cover;">
         @yield('content')
     <script src="{{asset('assets/auth/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
     <!--===============================================================================================-->

@@ -45,4 +45,7 @@ class User extends Authenticatable
     public function user(){
         return $this->hasMany(Cart::class, 'user_id', 'id');
     }
+    public function lastUser(){
+        return $this->hasMany(Transaction::class, 'user_id', 'id');
+    }
 }

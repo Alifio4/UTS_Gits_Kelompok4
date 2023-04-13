@@ -19,9 +19,9 @@ class CategoryController extends Controller
 
     public function store(Request $request){
         $categorys = new Category;
-        $categorys->nama = $request->nama;
+        $categorys->name = $request->name;
         $categorys->save();
-
+        // return redirect()->route('category.index');
         return redirect()->route('category.index');
     }
 
@@ -33,7 +33,7 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id){
         $categorys = Category::findOrFail($id);
-        $categorys->nama = $request->nama;
+        $categorys->name = $request->name;
         $categorys->save();
 
         return redirect()->route('category.index');
