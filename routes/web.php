@@ -27,7 +27,7 @@ Route::get('/register', [AuthController::class, 'register'])->name('register')->
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('isTamu');
 Route::post('/register', [AuthController::class, 'doRegister'])->name('doRegister')->middleware('isTamu');
 Route::post('/login', [AuthController::class, 'doLogin'])->name('doLogin')->middleware('isTamu');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('isTamu');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 // Route::middleware(['auth'])->group(function () {
