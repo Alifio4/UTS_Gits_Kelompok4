@@ -21,6 +21,7 @@ class ProductController extends Controller
         $b = Auth::id();
         $data['products'] = Product::with('category')->get();
         $data['cart'] = Cart::where('status','ditambahkan')->where('user_id',$b)->get()->count();
+        $data['carts'] = Cart::with('cart')->where('user_id', $b)->get();
 
         return view('auth/home', $data);
     }
@@ -59,7 +60,7 @@ class ProductController extends Controller
             'category_id'=>$validated['category_id']
         ]);
 
-        return redirect('/');
+        return redirect('product');
     }
 
     /**
@@ -109,7 +110,7 @@ class ProductController extends Controller
             'category_id'=>$validated['category_id']
         ]);
 
-        return redirect('/');
+        return redirect('/product');
     }
 
     /**
@@ -121,7 +122,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::destroy($id);
-        return redirect('/');
+        return redirect('/product');
     }
 
 }

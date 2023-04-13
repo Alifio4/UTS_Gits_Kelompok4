@@ -8,9 +8,9 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <div class="login100-pic js-tilt" data-tilt>
+            <a href="{{ url('/') }}" class="login100-pic js-tilt" data-tilt>
                 <img src="{{asset('assets/auth/images/img-01.png')}}" alt="IMG">
-            </div>
+            </a>
 
             <form action="{{route('doLogin')}}" method="POST">
                 <span class="login100-form-title">

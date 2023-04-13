@@ -41,7 +41,7 @@ class CartController extends Controller
             //
             $keranjang->product_id = $id;
             $keranjang->save();
-            return redirect('/');
+            return redirect('/product');
         } else {
             $detect = DB::table('carts')->where('product_id', $id)->get();
             foreach ($detect as $item) {
@@ -51,13 +51,13 @@ class CartController extends Controller
                     DB::table('carts')->where('product_id', $id)->update([
                         'qty' => $qty->qty + 1,
                     ]);
-                    return redirect('/');
+                    return redirect('/product');
                 } else if ($item->product_id !== $id) {
                     // dd($item->product_id." dan ".$id);
                     $keranjang = new Cart;
                     $keranjang->product_id = $id;
                     $keranjang->save();
-                    return redirect('/');
+                    return redirect('/product');
                 }
             }
         }

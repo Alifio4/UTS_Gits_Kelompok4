@@ -3,8 +3,8 @@
 @section('title', 'Homepage')
 
 @section('content')
-    <a href="/">
-        <button class="btn btn-primary mt-4 mx-3" type="button">+ Tambah Produk ke Keranjang</button>
+    <a href="/product">
+        <button class="btn btn-primary mt-4 mx-4 my-3" type="button">Tambah Produk ke Keranjang</button>
     </a>
     <div class="row fs-5 text-center">
         @foreach ($carts as $item)
@@ -81,10 +81,10 @@
                                         </svg>
                                         Checkout
                                     </button>
-                                <form action="{{ route('cart.pay') }}" method="POST">
+                                {{-- <form action="{{ route('cart.pay') }}" method="POST">
                                     @csrf
                                     <button class="btn btn-primary mt-4 mx-3" type="submit">Lunas</button>
-                                </form>
+                                </form> --}}
                             </div>
                     </div>
                 </div>
@@ -94,7 +94,10 @@
     <div class="popup" id="popup">
         <h2>Transaksi</h2>
         <p>Apakah anda ingin membayar sekarang?</p>
-        <button type="button" onclick="closePopup()">OK</button>
+        <form action="{{ route('cart.pay') }}" method="POST">
+            @csrf
+            <button class="btn btn-primary mt-4 mx-3" type="submit" onclick="closePopup()">OK</button>
+        </form>
     </div>
 
     <script>

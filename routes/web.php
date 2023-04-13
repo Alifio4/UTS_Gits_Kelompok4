@@ -40,7 +40,7 @@ Route::get('/product/{id}/delete', [ProductController::class, 'destroy'])->middl
 Route::post('/product', [ProductController::class, 'store'])->middleware('isLogin');
 Route::put('/product/{id}', [ProductController::class, 'update'])->middleware('isLogin');
 
-Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
+Route::get('/category', [CategoryController::class, 'index'])->name('category.index')->middleware('isLogin');
 Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create')->middleware('isLogin');
 Route::post('/category/created', [CategoryController::class, 'store'])->name('category.store')->middleware('isLogin');
 Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit')->middleware('isLogin');
@@ -53,6 +53,6 @@ Route::group(['as' => 'cart.', 'prefix' => 'cart'], function () {
     Route::get('{id}/subtract', [CartController::class, 'subtract'])->name('subtract');
     Route::get('{id}/destroy', [CartController::class, 'destroy'])->name('destroy');
     Route::get('checkout', [CartController::class, 'index']);
-    // Route::post('pay', [CartController::class, 'pay'])->name('pay');
+    Route::post('pay', [CartController::class, 'pay'])->name('pay');
     })->middleware('isLogin');
 
